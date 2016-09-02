@@ -3,28 +3,33 @@
 -include_lib("kvs/include/entry.hrl").
 -include_lib("nitro/include/nitro.hrl").
 -include_lib("n2o/include/wf.hrl").
+-include_lib("kvs/include/feed.hrl").
 -include_lib("kvs/include/kvs.hrl").
 
-event(init) -> [ wf:update(X,?MODULE:X()) || X <- [streams,datawin,binders,boot] ].
+event(init) -> [ wf:update(X,?MODULE:X()) || X <- [streams,datawin,binders,boot] ];
+event({stream,Name}) -> case kvs:get(feed,Name) of 
+                             {ok,V} -> wf:update(datawin,fold(Name,V#feed.top,20));
+                             _ -> wf:update(datawin,fold(Name,0,0)) end;
+event(U) -> io:format("Unknown Event: ~p~n",[U]).
 
 pro() ->    [ #script { src = "/static/adm.min.js"} ].
-dev()  -> [ [ #script { src = lists:concat(["/n2o/protocols/",X,".js"])} || X <- [bert] ],
-            [ #script { src = lists:concat(["/n2o/",Y,".js"])}           || Y <- [bullet,n2o,utf8] ] ].
+dev()  -> [ [ #script { src = lists:concat(["/n2o/protocols/",X,".js"])} || X <- [bert,nitrogen] ],
+            [ #script { src = lists:concat(["/n2o/",Y,".js"])}           || Y <- [bullet,n2o,utf8,validation] ] ].
 main() ->     #dtl    { file = "index", app=adm,
                         bindings = [{body,[]},
-                                    {javascript,pro()}]}.
+                                    {javascript,dev()}]}.
 
 tables() -> [ element(2,T) || T <- kvs:tables() ].
 binders_() -> [ X || {X,_}<- kvs:containers() ].
 bsize(Config) -> lists:sum([ mnesia:table_info(Name,size) || #block{name=Name} <- Config ]).
 blocks(Config) -> length(Config)+1.
-row(Name) -> Config = kvs:config(Name),
-             #tr{id=Name,cells=[#td{body=#b{body=lists:concat([Name])}},
+row(Name) -> Config = kvs:config(Name), StrName = lists:concat([Name]),
+             #tr{id=Name,cells=[#td{body=#link{id=Name,href="#",onclick="setup_window("++StrName++");",body=StrName,postback={stream,Name}}},
                                 #td{body=lists:concat([blocks(Config)])},
                                 #td{body=lists:concat([bsize(Config)+mnesia:table_info(Name,size)])}]}.
 
-row2(Name) -> Config = kvs:config(Name),
-             #tr{id=Name,cells=[#td{body=#b{body=lists:concat([Name])}},
+row2(Name) -> Config = kvs:config(Name), StrName = lists:concat([Name]),
+             #tr{id=Name,cells=[#td{body=#link{id=Name,href="#",body=StrName,onclick="setup_window("++StrName++");",postback={binder,Name}}},
                                 #td{body=lists:concat([kvs:count(Name)])}]}.
 
 row3(Record) -> io:format("R: ~s~n",[io_lib:format("~p",[Record])]),
