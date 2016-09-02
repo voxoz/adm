@@ -1,0 +1,9 @@
+{application, adm, [
+    {description,  "ADM Monitoring Server"},
+    {vsn,          "1.0"},
+    {applications, [kernel, stdlib, bpe, n2o, kvs]},
+    {modules, []},
+    {registered,   []},
+    {mod, { adm,   []}},
+    {env, []}
+]}.
