@@ -34,13 +34,13 @@ display: table-header-group   // <thead>
 
 -->
 
-<table width=100% cellspacing=0 cellpadding=0 style="margin-top:-80px;border-width:0px;"><tr><td width=70% >
+<table width=100% cellspacing=0 cellpadding=0 style="margin-top:-80px;border-width:0px;"><tr><td width=60% >
 <H1 style="font-family:microgramma;">KVS</H1>
 <div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">HK: 01-78</div>
-</td><td valign=top align=right width=30%>
-<div align=right>LOGGED-IN: 5HT<br>
-                        VM: nonode@nohost<br>
-                      DATE: 31 AUG 2016</div>
+</td><td valign=top align=right width=40%>
+<div align=right>LOGGED-IN: {{session}}<br>
+                        VM: {{enode}}<br>
+                      DATE: {{date}}</div>
 </td></tr></table>
 
 {{body}}
@@ -70,11 +70,6 @@ display: table-header-group   // <thead>
 </table>
 </div>
 
-<div id=datawin class=wizard>
-<h2>DATA WINDOW</h2>
-<div style="font-size:12pt;background-color:white;">
-</div>
-</div>
 
 <div id=binders class=wizard>
 <h2>BINDERS<h2>
@@ -96,26 +91,6 @@ display: table-header-group   // <thead>
     <td>0</td>
   </tr>
 </table>
-
-</div>
-
-<div id=trees class=wizard>
-<h2>TREE<h2>
-<table cellpadding=5 align=left  style="border-style:solid;border-width:1px;padding:20px;">
-  <tr>
-    <th>Name</th>
-    <th>Records</th>
-  </tr>
-  <tr>
-    <th>folder</th>
-    <td>189</td>
-  </tr>
-  <tr>
-    <th>device</th>
-    <td>100</td>
-  </tr>
-</table>
-
 </div>
 
 <div id=boot class=wizard>
@@ -126,6 +101,12 @@ display: table-header-group   // <thead>
  comment,feed,subscription,process,history,sequenceFlow,
  userTask,serviceTask,messageEvent,beginEvent,endEvent]
 
+</div>
+</div>
+
+<div id=datawin class=wizard style="width:700px;">
+<h2>DATA WINDOW</h2>
+<div style="font-size:12pt;background-color:white;">
 </div>
 </div>
 
