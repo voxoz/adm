@@ -36,7 +36,7 @@ display: table-header-group   // <thead>
 
 <table width=100% cellspacing=0 cellpadding=0 style="margin-top:-80px;border-width:0px;"><tr><td width=60% >
 <H1 style="font-family:microgramma;">KVS</H1>
-<div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">MEM: {{mem}}, RAM: {{ram}}</div>
+<div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">DISC: {{disc}}, RAM: {{ram}}</div>
 </td><td valign=top align=right width=40%>
 <div align=right>LOGGED-IN: {{session}}<br>
                         VM: {{enode}}<br>
@@ -112,7 +112,7 @@ display: table-header-group   // <thead>
 
 
 </div>
-        <script>var transition = {pid: '', host: 'localhost', port:'8108'};</script>
+        <script>var transition = {pid: '', host: window.host, port: window.port};</script>
         {{javascript}}
         <script>protos = [$bert]; N2O_start();</script>
 </body>
