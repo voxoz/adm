@@ -9,7 +9,7 @@
 }
 
 .wizard { float:left;padding-right:20px;margin-top:10px;margin-bottom:10px; }
-table { border-style:solid;border-width:1px;padding:20px; }
+table { border-style:solid;border-width:0px;padding:20px; }
 
 th {text-align:left;}
 td {}

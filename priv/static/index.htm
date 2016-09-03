@@ -7,7 +7,7 @@
     <meta name="author" content="Maxim Sokhatsky" />
     <title>ADM</title>
     <link rel="stylesheet" href="static/5HT.css" />
-    <link rel="stylesheet" href="static/adm.css" />
+    <link rel="stylesheet" href="static/adm.css?v=1" />
     <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
     <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script type="text/javascript"> function setup_window(name) { console.log("OK"); }; </script>
@@ -36,7 +36,7 @@ display: table-header-group   // <thead>
 
 <table width=100% cellspacing=0 cellpadding=0 style="margin-top:-80px;border-width:0px;"><tr><td width=60% >
 <H1 style="font-family:microgramma;">KVS</H1>
-<div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">DISC: {{disc}}, RAM: {{ram}}</div>
+<div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">SSD: {{disc}}, RAM: {{ram}}</div>
 </td><td valign=top align=right width=40%>
 <div align=right>LOGGED-IN: {{session}}<br>
                         VM: {{enode}}<br>
@@ -46,7 +46,7 @@ display: table-header-group   // <thead>
 {{body}}
 <div id=streams class=wizard>
 <h2>STREAMS</h2>
-<table cellpadding=5 align=left  style="border-style:solid;border-width:1px;padding:20px;">
+<table cellpadding=5 align=left  style="border-style:solid;padding:20px;">
   <tr>
     <th>Table</th>
     <th>Rotates</th>
@@ -73,7 +73,7 @@ display: table-header-group   // <thead>
 
 <div id=binders class=wizard>
 <h2>BINDERS<h2>
-<table cellpadding=5 align=left  style="border-style:solid;border-width:1px;padding:20px;">
+<table cellpadding=5 align=left  style="border-style:solid;padding:20px;">
   <tr>
     <th>Table</th>
     <th>Count</th>

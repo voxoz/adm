@@ -61,18 +61,16 @@ row3(Record) ->
 
 boot_() ->
   #panel{class=wizard,id=boot, body=[#h2{body="BOOT"},
-      #panel{style="width:550px;font-size:12pt;background-color:white;",body="["++string:join([ atom_to_list(T)||T<-tables()],", ")++"]"}]}.
+      #panel{body="["++string:join([ atom_to_list(T)||T<-tables()],", ")++"]"}]}.
 
 boot() ->
   #panel{class=wizard,id=boot, body=[#h2{body="CORE"},
-      #table{style="border-style:solid;border-width:1px;padding:20px;",
-             body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Size"}]}},
+      #table{body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Size"}]}},
                    #tbody{body=[row2(Name)||Name<- tables()-- (iterators()++containers()) ]}]}]}.
 
 streams() ->
   #panel{class=wizard,id=streams, body=[#h2{body="STREAMS"},
-      #table{style="border-style:solid;border-width:1px;padding:20px;",
-             body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Blocks"},#th{body="Size"}]}},
+      #table{body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Blocks"},#th{body="Size"}]}},
                    #tbody{body=[row(Name)||Name<- iterators() ]}]}]}.
 
 first(Name) -> {atomic,Key} = mnesia:transaction(fun() -> mnesia:first(Name) end), Key.
@@ -89,7 +87,7 @@ table_fold(Name,First,Count,Acc) ->
 datawin() -> fold(group,20,10).
 fold_(Traverse) ->
   #panel{class=wizard,id=datawin, body=[#h2{body="DATA WINDOW"},
-      #table{style="width:100%;border-style:solid;border-width:1px;padding:20px;",
+      #table{style="width:100%;",
              body=[#thead{body=#tr{cells=[#th{body="No"},#th{body="Record"}]}},
                    #tbody{body=[row3(Record)||Record<- Traverse]},
                    #tfoot{body=[#th{body=#link{body="prev"}},#th{body=#link{body="next",postback={shift}}}]}
@@ -101,6 +99,5 @@ fold(Table,Start,Count) ->
 
 binders() ->
   #panel{class=wizard,id=binders, body=[#h2{body="BINDERS"},
-      #table{style="border-style:solid;border-width:1px;padding:20px;",
-             body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Size"}]}},
+      #table{body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Size"}]}},
                    #tbody{body=[row2(Name)||Name<- containers()]}]}]}.
