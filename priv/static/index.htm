@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="static/5HT.css" />
     <link rel="stylesheet" href="static/adm.css?v=1" />
     <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
-    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    <script type="text/javascript"> function setup_window(name) { console.log("OK"); }; </script>
+    <script> function setup_window(name) { console.log("OK"); }; </script>
 </head>
 <body>
 
@@ -37,6 +36,10 @@ display: table-header-group   // <thead>
 <table width=100% cellspacing=0 cellpadding=0 style="margin-top:-80px;border-width:0px;"><tr><td width=60% >
 <H1 style="font-family:microgramma;">KVS</H1>
 <div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">SSD: {{disc}}, RAM: {{ram}}</div>
+<svg width="700" height="200"></svg>
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script src="static/d3.js?v=22"></script>
+
 </td><td valign=top align=right width=40%>
 <div align=right>LOGGED-IN: {{session}}<br>
                         VM: {{enode}}<br>
