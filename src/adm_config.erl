@@ -1,4 +1,4 @@
--module(config).
+-module(adm_config).
 -compile(export_all).
 
 log_level() -> info.

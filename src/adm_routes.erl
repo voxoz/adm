@@ -1,4 +1,4 @@
--module(routes).
+-module(adm_routes).
 -author('Maxim Sokhatsky').
 -include_lib("n2o/include/wf.hrl").
 -export([init/2, finish/2]).

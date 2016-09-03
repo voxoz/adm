@@ -88,12 +88,6 @@ table_fold(Name,First,Count,Acc) ->
 
 datawin() -> fold(group,20,10).
 fold_(Traverse) ->
-%  Rec = hd(Traverse),
-%  Name = element(1,Rec),
-%  Id = element(2,Rec),
-%  Container = element(3,Rec),
-%  Prev = element(5,Rec),
-%  Next = element(6,Rec),
   #panel{class=wizard,id=datawin, body=[#h2{body="DATA WINDOW"},
       #table{style="width:100%;border-style:solid;border-width:1px;padding:20px;",
              body=[#thead{body=#tr{cells=[#th{body="No"},#th{body="Record"}]}},
