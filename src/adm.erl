@@ -2,8 +2,9 @@
 -description('ADM Monitoring').
 -behaviour(supervisor).
 -behaviour(application).
--export([start/2, stop/1, init/1]).
+-export([start/2, stop/1, init/1,main/1]).
 
+main(X)   -> mad:repl(X).
 tables() -> [ fs ].
 opt()    -> [ set, named_table, { keypos, 1 }, public ].
 spec()   -> ranch:child_spec(http, 100, ranch_tcp, port(), cowboy_protocol, env()).
