@@ -11,7 +11,7 @@ env()    -> [ { env, [ { dispatch, points() } ] } ].
 static() ->   { dir, "priv/static", mime() }.
 n2o()    ->   { dir, "deps/n2o/priv", mime() }.
 mime()   -> [ { mimetypes, cow_mimetypes, all   } ].
-port()   -> [ { port, wf:config(n2o,port,8000)  } ].
+port()   -> [ { port, wf:config(n2o,port,8108)  } ].
 points() -> cowboy_router:compile([{'_',
             [ {"/static/[...]",       n2o_static,  static()},
               {"/n2o/[...]",          n2o_static,  n2o()},
