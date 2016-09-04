@@ -33,7 +33,7 @@ g.append("g")
     .datum(data)
     .attr("class", "line")
   .transition()
-    .duration(600)
+    .duration(3000)
     .ease(d3.easeLinear)
     .on("start", tick);
 function tick() {
