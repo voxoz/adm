@@ -26,11 +26,10 @@
     <div class=header>
       <h1 class=title>KVS</h1>
       <div class=resources>
-        <div>SSD: <span id=disc></span></div>
-        <div>RAM: <span id=ram></span></div>
+        SSD: <span id=disc></span>, RAM: <span id=ram></span>
       </div>
       <div class="info">
-        <div>LOGGED-IN:<br>
+        <div>LOGGED-IN:
           <div id=session></div>
         </div>
         <div>VM: <span id=enode></span></div>
@@ -45,19 +44,17 @@
     </div>
 
     <div class=container>
-      <div class=column>
-        <div id=streams>
-          <h2>STREAMS</h2>
-        </div>
-        <div id=binders>
-          <h2>BINDERS</h2>
-        </div>
-        <div id=boot>
-          <h2>CORE</h2>
-        </div>
+      <div id=streams>
+        <h2>STREAMS</h2>
       </div>
       <div id=datawin>
         <h2>DATA WINDOW</h2>
+      </div>
+      <div id=binders>
+        <h2>BINDERS</h2>
+      </div>
+      <div id=boot>
+        <h2>CORE</h2>
       </div>
     </div>
 
@@ -74,7 +71,11 @@
   <script src='/n2o/n2o.js'></script>
   <script src='/n2o/validation.js'></script>
   <script src='/n2o/ftp.js'></script>
-  <script>protos = [$bert]; N2O_start();</script>
+  <script>protos = [$bert]; N2O_start();
+    document.body.addEventListener('click', function(e) {
+      e.preventDefault()
+    })
+  </script>
 </body>
 
 </html>
