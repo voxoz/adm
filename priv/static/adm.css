@@ -17,13 +17,14 @@ body {
   background: white;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
   display: flex;
+  font-family: Microgramma;
   justify-content: center;
 }
 
 .nav > a {
   color: #585858;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 20px;
   padding: 10px 20px;
 }
 
@@ -60,7 +61,7 @@ body {
   }
 }
 
-.header > .h {
+.header > .title {
   font-size: 50px;
   line-height: 1;
   padding: 0 20px 20px 0;
@@ -127,6 +128,7 @@ body {
 
 #streams h2 {
   color: #AB47BC;
+  flex: 1 0 auto;
 }
 
 #binders h2 {
@@ -179,3 +181,10 @@ body {
 .container a:focus {
   color: #2D4762;
 }
+
+@font-face {
+    font-family: "Microgramma";
+    src: url("http://www.myfontfree.com/data/518/m/microgrammabold/Microgramma Bold.ttf");
+}
+
+.title { font-family: Microgramma; }
