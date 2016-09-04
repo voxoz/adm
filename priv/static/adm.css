@@ -104,6 +104,8 @@ body {
   width: 100%;
 }
 
+  svg {width:500px;}
+
 @media(min-width: 768px) {
   .header {
     justify-content: space-between;
@@ -112,6 +114,8 @@ body {
   .header > .info {
     text-align: right;
   }
+  svg {width:800px;}
+  
 
   .container > div:nth-child(2)  {
     position: absolute;
