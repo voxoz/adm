@@ -7,6 +7,10 @@ table {
   border-collapse: collapse;
 }
 
+/*html, body {
+  min-height: 10000px;
+}*/
+
 body {
   margin: 0;
   background: #F4F4F4;
@@ -16,15 +20,17 @@ body {
 .nav {
   background: white;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  font-family: Microgramma;
+ 
 }
 
 .nav > a {
+  display: inline-block;
   color: #585858;
   text-decoration: none;
-  font-size: 30px;
-  padding: 10px 20px;
+  font-size: 20px;
+  padding: 20px 20px;
 }
 
 .nav > a:visited {
@@ -42,33 +48,24 @@ body {
 }
 
 .app {
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
 }
 
 .header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  flex: 1 0 auto;
-  padding: 20px;
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
 }
 
-@media(min-width: 820px) {
-  .header {
-    padding: 20px 0;
-  }
-}
-
-.header > .h {
+.header > .title {
   font-size: 50px;
   line-height: 1;
-  padding: 0 20px 20px 0;
+  padding: 0;
   margin: 0;
 }
 
 .header > .resources {
-  margin: 3px auto 0 0;
   padding-right: 20px;
   font-size: 17px;
 }
@@ -88,56 +85,58 @@ body {
 }
 
 .container {
-  margin: 40px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  padding: 1px;
+  margin: 60px 0;
+  position: relative;
 }
 
-@media(min-width: 840px) {
-  .container {
-    margin: 40px -10px;
-  }
-}
-
-.container > .column {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-@media(min-width: 600px) {
-  .container > .column {
-    flex-direction: column;
-     flex: 0 0 auto;
-  }
-}
-
-#streams, #binders, #boot, #datawin {
+.container > div {
+  width: 200px;
+  overflow-x: scroll;
   background: white;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-  padding: 10px 10px; 
+  padding: 10px; 
   border-radius: 4px;
   margin: 10px;
 }
 
-#datawin {
-  flex: 1 0 auto;
+.container > div:nth-child(2) {
+  width: 100%;
 }
 
-#streams h2 {
+@media(min-width: 768px) {
+  .header {
+    justify-content: space-between;
+    flex-flow: row wrap;
+  }
+  .header > .info {
+    text-align: right;
+  }
+
+  .container > div:nth-child(2)  {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 240px);
+  }
+}
+
+
+
+
+.container > div:nth-child(1)  h2 {
   color: #AB47BC;
 }
 
-#binders h2 {
+.container > div:nth-child(2) h2 {
   color: #7E57C2;
 }
 
-#boot h2 {
+.container > div:nth-child(3) h2 {
   color: #26A69A;
 }
 
-#datawin h2 {
+.container > div:nth-child(4) h2 {
   color: #42A5F5;
 }
 
@@ -179,3 +178,10 @@ body {
 .container a:focus {
   color: #2D4762;
 }
+
+@font-face {
+    font-family: "Microgramma";
+    src: url("http://www.myfontfree.com/data/518/m/microgrammabold/Microgramma Bold.ttf");
+}
+
+.title { font-family: Microgramma; }
