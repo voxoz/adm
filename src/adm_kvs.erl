@@ -62,12 +62,12 @@ boot_() ->
       #panel{body="["++string:join([ atom_to_list(T)||T<-tables()],", ")++"]"}]}.
 
 boot() ->
-  #panel{class=wizard,id=boot, body=[#h2{body="CORE"},
+  #panel{id=boot, body=[#h2{body="CORE"},
       #table{body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Size"}]}},
                    #tbody{body=[row2(Name)||Name<- tables()-- (iterators()++containers()) ]}]}]}.
 
 streams() ->
-  #panel{class=wizard,id=streams, body=[#h2{body="STREAMS"},
+  #panel{id=streams, body=[#h2{body="STREAMS"},
       #table{body=[#thead{body=#tr{cells=[#th{body="Name"},#th{body="Blocks"},#th{body="Size"}]}},
                    #tbody{body=[row(Name)||Name<- iterators() ]}]}]}.
 

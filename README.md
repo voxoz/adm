@@ -20,6 +20,7 @@ Now you can try it out: [http://localhost:8108](http://localhost:8108)
 Credits
 -------
 
-
+* Maxim Sokhatsky
+* Arseniy Bushyn
 
 OM A HUM
