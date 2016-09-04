@@ -15,6 +15,10 @@ mime()   -> [ { mimetypes, cow_mimetypes, all   } ].
 port()   -> [ { port, wf:config(n2o,port,8108)  } ].
 points() -> cowboy_router:compile([{'_',
             [ {"/static/[...]",       n2o_static,  static()},
+              {"/adm.css",            cowboy_static,  { file, "priv/static/adm.css", mime() }},
+              {"/5HT.css",            cowboy_static,  { file, "priv/static/5HT.css", mime() }},
+              {"/d3.js",              cowboy_static,  { file, "priv/static/d3.js", mime() }},
+              {"/Geometria-Light.otf",cowboy_static,  { file, "priv/static/Geometria-Light.otf", mime() }},
               {"/n2o/[...]",          n2o_static,  n2o()},
               {"/ws/[...]",           n2o_stream,  []},
               {'_',                   n2o_cowboy,  []} ]} ]).
