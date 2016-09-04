@@ -2,7 +2,10 @@
   box-sizing: border-box;
 }
 
-.line { fill: none; stroke: #3498DB; stroke-width: 1.5px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
 body {
   margin: 0;
@@ -51,6 +54,12 @@ body {
   padding: 20px;
 }
 
+@media(min-width: 820px) {
+  .header {
+    padding: 20px 0;
+  }
+}
+
 .header > .h {
   font-size: 50px;
   line-height: 1;
@@ -72,6 +81,12 @@ body {
   overflow-x: hidden;
 }
 
+.line { 
+  fill: none;
+  stroke: #3498DB;
+  stroke-width: 1.5px;
+}
+
 .container {
   margin: 40px 0;
   display: flex;
@@ -79,12 +94,23 @@ body {
   justify-content: center;
 }
 
+@media(min-width: 840px) {
+  .container {
+    margin: 40px -10px;
+  }
+}
+
 .container > .column {
   display: flex;
-  /*flex*/
-    flex-wrap: wrap;
-    justify-content: center;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media(min-width: 600px) {
+  .container > .column {
+    flex-direction: column;
+    flex: 0;
+  }
 }
 
 #streams, #binders, #boot, #datawin {
@@ -92,29 +118,36 @@ body {
   box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
   padding: 10px 10px; 
   border-radius: 4px;
-  margin: 5px;
+  margin: 10px;
 }
 
-
-@media(min-width: 600px) {
-  .container > .column {
-   flex-direction: column;
-   flex-grow: 0;
-}
-  #datawin {
-    flex-grow: 1;
-  }
+#datawin {
+  flex: 1 0 auto;
 }
 
+#streams h2 {
+  color: #AB47BC;
+}
 
+#binders h2 {
+  color: #7E57C2;
+}
+
+#boot h2 {
+  color: #26A69A;
+}
+
+#datawin h2 {
+  color: #42A5F5;
+}
 
 .container h2 {
   font-size: 24px;
   font-weight: normal;
-  line-height: 1;
-  padding: 0;
-  margin: 0 0 10px 0;
-  color: #767DBD;
+  line-height: 1.2;
+  padding: 0 0 5px 0;
+  margin: 0 0 5px 0;
+  border-bottom: 1px solid rgba(0, 70, 100, 0.20);
 }
 
 .container th {
@@ -122,8 +155,12 @@ body {
   font-weight: normal;
 }
 
-.container td {
-  padding-right: 7px;
+.container tr:hover {
+  background: #EEEEEE;
+}
+
+.container td + td, .container th + th {
+  padding-left: 10px;
 }
 
 .container  a {
@@ -136,15 +173,9 @@ body {
 }
 
 .container a:hover {
-  color: #767DBD;
+  color: #2D4762;
 }
 
 .container a:focus {
   color: #2D4762;
-}
-
-
-table {
-  width: 100%;
-  border-collapse: collapse;
 }
