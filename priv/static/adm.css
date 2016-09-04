@@ -7,10 +7,6 @@ table {
   border-collapse: collapse;
 }
 
-/*html, body {
-  min-height: 10000px;
-}*/
-
 body {
   margin: 0;
   background: #F4F4F4;
@@ -92,7 +88,7 @@ body {
 
 .container > div {
   width: 240px;
-  overflow-x: scroll;
+  overflow-x: auto;
   background: white;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
   padding: 10px; 
@@ -101,7 +97,7 @@ body {
 }
 
 .container > div:nth-child(2) {
-  width: 100%;
+  width: auto;
 }
 
   svg {width:500px;}
