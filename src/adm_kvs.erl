@@ -1,23 +1,21 @@
 -module(adm_kvs).
 -compile(export_all).
--include_lib("kvs/include/entry.hrl").
 -include_lib("nitro/include/nitro.hrl").
--include_lib("n2o/include/wf.hrl").
--include_lib("kvs/include/feed.hrl").
 -include_lib("kvs/include/kvs.hrl").
 
 event(init) -> [ self() ! {direct,{atom,X}} || X <- [streams,datawin,binders,boot] ],
                wf:update(disc,hd(string:tokens(os:cmd("du -hs Mnesia."++lists:concat([node()])),"\t"))),
                wf:update(ram, case os:type() of
-                                             {_,darwin} -> [L,C,R]=string:tokens(lists:filter(fun(X) ->
-                                              lists:member(X,"0123456789M") end,os:cmd("top -l 1 -s 0 | grep PhysMem")),"M"),
-                                              lists:concat([L,"/",list_to_integer(L)+list_to_integer(R),"M"]);
-                                              {_,linux} -> [T,U,_,_,B,C] = lists:sublist(string:tokens(os:cmd("free")," \n"),8,6),
-                                                          lists:concat([(wf:to_integer(U)-(wf:to_integer(B)+wf:to_integer(C))) div 1000,"/",wf:to_integer(T) div 1000,"M"]);
-                                                    _ -> "N/A" end),
-              wf:update(date,bpe_date:date_to_string(bpe_date:today())),
-              wf:update(enode,lists:concat([node()])),
-              wf:update(session,n2o_session:session_id());
+                  {_,darwin} -> [L,C,R]=string:tokens(lists:filter(fun(X) ->
+                                lists:member(X,"0123456789M") end,os:cmd("top -l 1 -s 0 | grep PhysMem")),"M"),
+                                lists:concat([L,"/",list_to_integer(L)+list_to_integer(R),"M"]);
+                   {_,linux} -> [T,U,_,_,B,C] = lists:sublist(string:tokens(os:cmd("free")," \n"),8,6),
+                                lists:concat([(wf:to_integer(U)-(wf:to_integer(B)+wf:to_integer(C))) div 1000,
+                                              "/",wf:to_integer(T) div 1000,"M"]);
+                          OS -> "Unknown OS: " ++ io_lib:format("~tp",[OS]) end),
+               wf:update(date,bpe_date:date_to_string(bpe_date:today())),
+               wf:update(enode,lists:concat([node()])),
+               wf:update(session,n2o_session:session_id());
 event({binder,Name}) -> wf:update(datawin,fold_(table_fold(Name,first(Name),20,[])));
 event({stream,Name}) -> Feed = case element(3,kvs:table(Name)) of
                             true -> feed;
@@ -31,7 +29,7 @@ event(U) -> io:format("Unknown Event: ~p~n\n",[U]).
 pro() ->    [ #script { src = "/static/adm.min.js"} ].
 dev()  -> [ [ #script { src = lists:concat(["/n2o/protocols/",X,".js"])} || X <- [bert,nitrogen] ],
             [ #script { src = lists:concat(["/n2o/",Y,".js"])}           || Y <- [bullet,n2o,utf8,validation] ] ].
-main() ->     #dtl    { file = "index", app=adm,
+main() -> #dtl    { file = "index", app=adm,
                         bindings = []}.
 
 tables() -> [ element(2,T) || T <- kvs:tables() ].
@@ -41,13 +39,15 @@ noniterators() -> [ element(2,T) || T <- kvs:tables(), record_info(fields,iterat
 binders_() -> [ X || {X,_}<- kvs:containers() ].
 bsize(Config) -> lists:sum([ mnesia:table_info(Name,size) || #block{name=Name} <- Config ]).
 blocks(Config) -> length(Config)+1.
+opacity() -> wf:jse("qi('datawin').style.opacity='0.3';").
+setup_window(StrName) -> "setup_window("++StrName++");".
 row(Name) -> Config = kvs:config(Name), StrName = lists:concat([Name]),
-             #tr{id=Name,cells=[#td{body=#link{href="#",onclick=wf:jse("qi('datawin').style.opacity='0.3';")++"setup_window("++StrName++");",body=StrName,postback={stream,Name}}},
+             #tr{id=Name,cells=[#td{body=#link{onclick=[opacity(),setup_window(StrName)],body=StrName,postback={stream,Name}}},
                                 #td{body=lists:concat([blocks(Config)])},
                                 #td{body=lists:concat([bsize(Config)+mnesia:table_info(Name,size)])}]}.
 
 row2(Name) -> Config = kvs:config(Name), StrName = lists:concat([Name]),
-             #tr{id=Name,cells=[#td{body=#link{body=StrName,onclick=wf:jse("qi('datawin').style.opacity='0.3';"),postback={binder,Name}}},
+             #tr{id=Name,cells=[#td{body=#link{body=StrName,onclick=opacity(),postback={binder,Name}}},
                                 #td{body=lists:concat([kvs:count(Name)])}]}.
 
 row3(Record) ->

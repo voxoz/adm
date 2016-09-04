@@ -1,5 +1,5 @@
 -module(adm).
--description('ADM Monitoring').
+-description('ADM Monitoring Bootcode').
 -behaviour(supervisor).
 -behaviour(application).
 -export([start/2, stop/1, init/1,main/1]).
@@ -17,6 +17,7 @@ points() -> cowboy_router:compile([{'_',
             [ {"/static/[...]",       n2o_static,  static()},
               {"/adm.css",            cowboy_static,  { file, "priv/static/adm.css", mime() }},
               {"/5HT.css",            cowboy_static,  { file, "priv/static/5HT.css", mime() }},
+              {"/adm.min.js",         cowboy_static,  { file, "priv/static/adm.min.js", mime() }},
               {"/d3.js",              cowboy_static,  { file, "priv/static/d3.js", mime() }},
               {"/Geometria-Light.otf",cowboy_static,  { file, "priv/static/Geometria-Light.otf", mime() }},
               {"/n2o/[...]",          n2o_static,  n2o()},
@@ -25,6 +26,6 @@ points() -> cowboy_router:compile([{'_',
 
 stop(_)    -> ok.
 start(_,_) -> supervisor:start_link({local,adm},adm,[]).
-init([])   -> kvs:join(),
+init([])   -> kvs:join(), case wf:config(n2o,mq) of n2o_syn -> syn:init(); _ -> ok end,
               [ ets:new(T,opt()) || T <- tables() ],
               { ok, { { one_for_one, 5, 10 }, [spec()] } }.
