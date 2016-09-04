@@ -78,7 +78,7 @@ body {
   overflow-x: hidden;
 }
 
-.line { 
+.line {
   fill: none;
   stroke: #3498DB;
   stroke-width: 1.5px;
@@ -91,7 +91,7 @@ body {
 }
 
 .container > div {
-  width: 200px;
+  width: 240px;
   overflow-x: scroll;
   background: white;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
@@ -117,7 +117,7 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    width: calc(100% - 240px);
+    width: calc(100% - 280px);
   }
 }
 
