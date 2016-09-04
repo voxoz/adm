@@ -6,7 +6,18 @@
 -include_lib("kvs/include/feed.hrl").
 -include_lib("kvs/include/kvs.hrl").
 
-event(init) -> [ self() ! {direct,{atom,X}} || X <- [streams,datawin,binders,boot] ];
+event(init) -> [ self() ! {direct,{atom,X}} || X <- [streams,datawin,binders,boot] ],
+               wf:update(disc,hd(string:tokens(os:cmd("du -hs Mnesia."++lists:concat([node()])),"\t"))),
+               wf:update(ram, case os:type() of
+                                             {_,darwin} -> [L,C,R]=string:tokens(lists:filter(fun(X) ->
+                                              lists:member(X,"0123456789M") end,os:cmd("top -l 1 -s 0 | grep PhysMem")),"M"),
+                                              lists:concat([L,"/",list_to_integer(L)+list_to_integer(R),"M"]);
+                                              {_,linux} -> [T,U,_,_,B,C] = lists:sublist(string:tokens(os:cmd("free")," \n"),8,6),
+                                                          lists:concat([(wf:to_integer(U)-(wf:to_integer(B)+wf:to_integer(C))) div 1000,"/",wf:to_integer(T) div 1000,"M"]);
+                                                    _ -> "N/A" end),
+              wf:update(date,bpe_date:date_to_string(bpe_date:today())),
+              wf:update(enode,lists:concat([node()])),
+              wf:update(session,n2o_session:session_id());
 event({binder,Name}) -> wf:update(datawin,fold_(table_fold(Name,first(Name),20,[])));
 event({stream,Name}) -> Feed = case element(3,kvs:table(Name)) of
                             true -> feed;
@@ -21,20 +32,7 @@ pro() ->    [ #script { src = "/static/adm.min.js"} ].
 dev()  -> [ [ #script { src = lists:concat(["/n2o/protocols/",X,".js"])} || X <- [bert,nitrogen] ],
             [ #script { src = lists:concat(["/n2o/",Y,".js"])}           || Y <- [bullet,n2o,utf8,validation] ] ].
 main() ->     #dtl    { file = "index", app=adm,
-                        bindings = [{body,[]},
-                                    {disc,hd(string:tokens(os:cmd("du -hs Mnesia."++lists:concat([node()])),"\t"))},
-                                    {ram,case os:type() of
-                                             {_,darwin} -> [L,C,R]=string:tokens(lists:filter(fun(X) ->
-                                              lists:member(X,"0123456789M") end,os:cmd("top -l 1 -s 0 | grep PhysMem")),"M"),
-                                              lists:concat([L,"/",list_to_integer(L)+list_to_integer(R),"M"]);
-                                              {_,linux} -> [T,U,_,_,B,C] = lists:sublist(string:tokens(os:cmd("free")," \n"),8,6),
-                                                          lists:concat([(wf:to_integer(U)-(wf:to_integer(B)+wf:to_integer(C))) div 1000,"/",wf:to_integer(T) div 1000,"M"]);
-                                                    _ -> "N/A" end
-                                          },
-                                    {date,bpe_date:date_to_string(bpe_date:today())},
-                                    {enode,lists:concat([node()])},
-                                    {session,n2o_session:session_id()},
-                                    {javascript,dev()}]}.
+                        bindings = []}.
 
 tables() -> [ element(2,T) || T <- kvs:tables() ].
 containers() -> [ element(2,T) || T <- kvs:tables(), record_info(fields,container) -- element(4,T) == [] ].

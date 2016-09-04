@@ -19,5 +19,5 @@ route_prefix(<<"/ws/",P/binary>>) -> route(P);
 route_prefix(<<"/",P/binary>>) -> route(P);
 route_prefix(P) -> route(P).
 
-route(<<>>)              -> adm_kvs;
+route(<<>>) -> adm_kvs;
 route(_) -> adm_kvs.

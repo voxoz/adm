@@ -6,8 +6,8 @@
     <meta name="description" content="SYNRC KVS ADM" />
     <meta name="author" content="Maxim Sokhatsky" />
     <title>ADM</title>
-    <link rel="stylesheet" href="static/5HT.css" />
-    <link rel="stylesheet" href="static/adm.css?v=1" />
+    <link rel="stylesheet" href="5HT.css" />
+    <link rel="stylesheet" href="adm.css" />
     <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
     <script> function setup_window(name) { console.log("OK"); }; </script>
 </head>
@@ -21,32 +21,19 @@
 <hr>
 <div class=app>
 
-<!--
-
-display: table                // <table>
-display: table-cell           // <td>
-display: table-row            // <tr>
-display: table-column         // <col>
-display: table-column-group   // <colgroup>
-display: table-footer-group   // <tfoot>
-display: table-header-group   // <thead>
-
--->
-
 <table width=100% cellspacing=0 cellpadding=0 style="margin-top:-80px;border-width:0px;"><tr><td width=60% >
 <H1 style="font-family:microgramma;">KVS</H1>
-<div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">SSD: {{disc}}, RAM: {{ram}}</div>
-<svg width="700" height="200"></svg>
+<div style="margin-left:160px;margin-top:-80px;padding-bottom:70px;">SSD: <span id=disc></span>, RAM: <span id=ram></span></div>
+    <svg width="700" height="200"></svg>
     <script src="http://d3js.org/d3.v4.min.js"></script>
-    <script src="static/d3.js?v=22"></script>
+    <script src="d3.js"></script>
 
 </td><td valign=top align=right width=40%>
-<div align=right>LOGGED-IN: {{session}}<br>
-                        VM: {{enode}}<br>
-                      DATE: {{date}}</div>
+<div align=right>LOGGED-IN: <span id=session></span><br>
+                        VM: <span id=enode></span><br>
+                      DATE: <span id=date></span></div>
 </td></tr></table>
 
-{{body}}
 <div id=streams class=wizard>
 <h2>STREAMS</h2>
 <table cellpadding=5 align=left  style="border-style:solid;padding:20px;">
@@ -116,7 +103,17 @@ display: table-header-group   // <thead>
 
 </div>
         <script>var transition = {pid: '', host: window.host, port: window.port};</script>
-        {{javascript}}
+        <script src='/n2o/protocols/bert.js'></script>
+        <script src='/n2o/protocols/binary.js'></script>
+        <script src='/n2o/protocols/client.js'></script>
+        <script src='/n2o/protocols/nitrogen.js'></script>
+        <script src='/n2o/bullet.js'></script>
+        <script src='/n2o/xhr.js'></script>
+        <script src='/n2o/utf8.js'></script>
+        <script src='/n2o/template.js'></script>
+        <script src='/n2o/n2o.js'></script>
+        <script src='/n2o/validation.js'></script>
+        <script src='/n2o/ftp.js'></script>
         <script>protos = [$bert]; N2O_start();</script>
 </body>
 </html>
