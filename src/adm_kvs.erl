@@ -42,12 +42,12 @@ binders_() -> [ X || {X,_}<- kvs:containers() ].
 bsize(Config) -> lists:sum([ mnesia:table_info(Name,size) || #block{name=Name} <- Config ]).
 blocks(Config) -> length(Config)+1.
 row(Name) -> Config = kvs:config(Name), StrName = lists:concat([Name]),
-             #tr{id=Name,cells=[#td{body=#link{href="#",onclick="setup_window("++StrName++");",body=StrName,postback={stream,Name}}},
+             #tr{id=Name,cells=[#td{body=#link{href="#",onclick=wf:jse("qi('datawin').style.opacity='0.3';")++"setup_window("++StrName++");",body=StrName,postback={stream,Name}}},
                                 #td{body=lists:concat([blocks(Config)])},
                                 #td{body=lists:concat([bsize(Config)+mnesia:table_info(Name,size)])}]}.
 
 row2(Name) -> Config = kvs:config(Name), StrName = lists:concat([Name]),
-             #tr{id=Name,cells=[#td{body=#link{href="#",body=StrName,onclick="setup_window("++StrName++");",postback={binder,Name}}},
+             #tr{id=Name,cells=[#td{body=#link{body=StrName,onclick=wf:jse("qi('datawin').style.opacity='0.3';"),postback={binder,Name}}},
                                 #td{body=lists:concat([kvs:count(Name)])}]}.
 
 row3(Record) ->
