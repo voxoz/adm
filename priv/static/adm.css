@@ -110,7 +110,7 @@ body {
 @media(min-width: 600px) {
   .container > .column {
     flex-direction: column;
-    flex: 0;
+     flex: 0 0 auto;
   }
 }
 
