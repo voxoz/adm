@@ -18,7 +18,7 @@ We use a very small and powerful tool called `mad`:
     $ ./mad static min
     $ ./mad rep
 
-Now you can try it out: [http://localhost:8108](http://localhost:8108)
+Now you can try it out: [http://127.0.0.1:8108](http://127.0.0.1:8108)
 
 Credits
 -------
