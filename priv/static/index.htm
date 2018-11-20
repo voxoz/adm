@@ -51,12 +51,19 @@
     </div>
 
   </div>
-  <script>var transition = {pid: '', host: window.host, port: window.port};
-          function validateSources() { }</script>
-  <script src='adm.min.js'></script>
-  <script>protos = [$bert]; N2O_start();
-          document.querySelector('.container').addEventListener('click', function(e) { e.preventDefault() })
-  </script>
+    <script src='/static/d3.js?v=2'></script>
+    <script src='/n2o/utf8.js?v=2'></script>
+    <script src='/n2o/bert.js?v=2'></script>
+    <script src='/n2o/heart.js?v=2'></script>
+    <script src='/n2o/n2o.js?v=2'></script>
+    <script>host = location.hostname === 'sample.n2o.space' ? 'ns.synrc.com' : location.hostname;
+            port = 8108;</script>
+    <script src='/n2o/ftp.js?v=2'></script>
+    <script src='/n2o/nitro.js?v=2'></script>
+    <script>protos = [$bert]; N2O_start();
+            document.querySelector('.container')
+                    .addEventListener('click', function(e) { e.preventDefault() });
+    </script>
 </body>
 
 </html>
